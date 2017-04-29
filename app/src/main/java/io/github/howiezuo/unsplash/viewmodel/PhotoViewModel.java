@@ -39,11 +39,6 @@ public class PhotoViewModel extends BaseObservable {
         this.mainListener = new WeakReference<>(listener);
     }
 
-    @Bindable
-    public String getSmallUrl() {
-        return photo.get().getUrls().getSmall();
-    }
-
     public void imageClicked() {
         if (mainListener != null && mainListener.get() != null) {
             mainListener.get().openPhotoDetail(photo.get().getId());
