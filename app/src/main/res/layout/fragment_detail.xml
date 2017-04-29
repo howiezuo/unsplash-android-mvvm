@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="io.github.howiezuo.unsplash.viewmodel.PhotoViewModel" />
+            type="io.github.howiezuo.unsplash.feature.detail.DetailViewModel" />
 
     </data>
 

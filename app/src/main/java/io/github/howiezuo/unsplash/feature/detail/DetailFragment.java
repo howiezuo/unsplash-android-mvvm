@@ -8,14 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import io.github.howiezuo.unsplash.databinding.FragmentDetailBinding;
-import io.github.howiezuo.unsplash.viewmodel.PhotoViewModel;
 
 
 public class DetailFragment extends Fragment {
 
     public static final String ARG_PHOTO_ID = "PHOTO_ID";
 
-    private PhotoViewModel photoViewModel;
+    private DetailViewModel detailViewModel;
 
     private FragmentDetailBinding detailBinding;
 
@@ -35,7 +34,7 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         detailBinding = FragmentDetailBinding.inflate(inflater, container, false);
-        detailBinding.setViewModel(photoViewModel);
+        detailBinding.setViewModel(detailViewModel);
         return detailBinding.getRoot();
     }
 
@@ -43,11 +42,11 @@ public class DetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        photoViewModel.setId(getArguments().getString(ARG_PHOTO_ID));
-        photoViewModel.load();
+        detailViewModel.setId(getArguments().getString(ARG_PHOTO_ID));
+        detailViewModel.load();
     }
 
-    public void setViewModel(PhotoViewModel viewModel) {
-        photoViewModel = viewModel;
+    public void setViewModel(DetailViewModel viewModel) {
+        detailViewModel = viewModel;
     }
 }

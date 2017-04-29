@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="io.github.howiezuo.unsplash.viewmodel.PhotosViewModel" />
+            type="io.github.howiezuo.unsplash.feature.main.MainViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

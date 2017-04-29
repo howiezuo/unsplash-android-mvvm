@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import io.github.howiezuo.unsplash.databinding.FragmentMainBinding;
-import io.github.howiezuo.unsplash.viewmodel.PhotosViewModel;
 
 
 public class MainFragment extends Fragment {
 
-    private PhotosViewModel photosViewModel;
+    private MainViewModel mainViewModel;
 
     private FragmentMainBinding mainBinding;
 
@@ -31,7 +30,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainBinding = FragmentMainBinding.inflate(inflater, container, false);
-        mainBinding.setViewModel(photosViewModel);
+        mainBinding.setViewModel(mainViewModel);
         return mainBinding.getRoot();
     }
 
@@ -43,10 +42,10 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new MainAdapter((MainListener) getActivity()));
 
-        photosViewModel.load();
+        mainViewModel.create();
     }
 
-    public void setViewModel(PhotosViewModel viewModel) {
-        photosViewModel = viewModel;
+    public void setViewModel(MainViewModel viewModel) {
+        mainViewModel = viewModel;
     }
 }
