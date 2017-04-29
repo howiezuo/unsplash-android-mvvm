@@ -1,4 +1,4 @@
-package io.github.howiezuo.unsplash.feature;
+package io.github.howiezuo.unsplash.feature.main;
 
 public interface MainListener {
 

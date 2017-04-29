@@ -1,4 +1,4 @@
-package io.github.howiezuo.unsplash.feature;
+package io.github.howiezuo.unsplash.feature.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

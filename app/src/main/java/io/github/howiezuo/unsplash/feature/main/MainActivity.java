@@ -1,11 +1,13 @@
-package io.github.howiezuo.unsplash.feature;
+package io.github.howiezuo.unsplash.feature.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import io.github.howiezuo.unsplash.R;
 import io.github.howiezuo.unsplash.ViewModelHolder;
+import io.github.howiezuo.unsplash.feature.detail.DetailActivity;
 import io.github.howiezuo.unsplash.util.ActivityUtils;
 import io.github.howiezuo.unsplash.viewmodel.PhotosViewModel;
 
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements MainListener {
 
     @Override
     public void openPhotoDetail(String photoId) {
-        //
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_PHOTO_ID, photoId);
+        startActivity(intent);
     }
 }

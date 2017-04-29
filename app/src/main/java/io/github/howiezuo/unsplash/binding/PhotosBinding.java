@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import io.github.howiezuo.unsplash.feature.MainAdapter;
+import io.github.howiezuo.unsplash.feature.main.MainAdapter;
 import io.github.howiezuo.unsplash.model.Photo;
 
 public class PhotosBinding {

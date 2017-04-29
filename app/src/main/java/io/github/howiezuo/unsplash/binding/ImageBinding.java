@@ -10,6 +10,8 @@ public class ImageBinding {
 
     @BindingAdapter("bind:url")
     public static void setUrl(final ImageView imageView, final String url) {
+        if (url == null) return;
+
         imageView.post(new Runnable() {
             @Override
             public void run() {
@@ -25,6 +27,8 @@ public class ImageBinding {
 
     @BindingAdapter({"bind:url", "bind:ratio"})
     public static void setUrl(final ImageView imageView, final String url, final double ratio) {
+        if (url == null) return;
+
         imageView.post(new Runnable() {
             @Override
             public void run() {

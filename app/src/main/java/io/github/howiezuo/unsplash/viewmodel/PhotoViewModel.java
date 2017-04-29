@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference;
 
 import io.github.howiezuo.unsplash.api.Api;
 import io.github.howiezuo.unsplash.api.PhotosService;
-import io.github.howiezuo.unsplash.feature.MainListener;
+import io.github.howiezuo.unsplash.feature.main.MainListener;
 import io.github.howiezuo.unsplash.model.Photo;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -21,7 +21,7 @@ public class PhotoViewModel extends BaseObservable {
 
     private String id;
 
-    private final ObservableField<Photo> photo = new ObservableField<>();
+    public final ObservableField<Photo> photo = new ObservableField<>();
 
     private WeakReference<MainListener> mainListener;
 
@@ -42,12 +42,6 @@ public class PhotoViewModel extends BaseObservable {
     @Bindable
     public String getSmallUrl() {
         return photo.get().getUrls().getSmall();
-    }
-
-    @Bindable
-    public String getFullUrl() {
-        if (photo.get() == null) return null;
-        return photo.get().getUrls().getFull();
     }
 
     public void imageClicked() {
