@@ -1,6 +1,7 @@
 package io.github.howiezuo.unsplash.app
 
 import android.app.Application
+import io.realm.Realm
 import java.io.IOException
 import java.util.*
 
@@ -16,6 +17,8 @@ class AppApplication : Application() {
         super.onCreate()
 
         instance = this
+
+        Realm.init(this)
 
         val properties = Properties()
         try {

@@ -8,16 +8,17 @@ import io.github.howiezuo.unsplash.model.Photo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import io.realm.Realm
 import javax.inject.Inject
 
 
 class DetailViewModel : BaseObservable() {
 
-    lateinit var id: String
-
     val photo = ObservableField<Photo>()
+    val errorText = ObservableField<String>()
 
-    val errorText = ObservableField<String>();
+    var id: String? = null
+    var realm: Realm? = null
 
     @Inject
     lateinit var photosService: PhotosService
@@ -29,21 +30,45 @@ class DetailViewModel : BaseObservable() {
     }
 
     private fun fetchPhoto() {
-        disposable = photosService.getPhoto(id)
+        disposable = id?.let {
+            photosService.getPhoto(it)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ t ->
                     photo.set(t)
+                    saveToLocal(t)
                 }, { t ->
                     errorText.set(t.localizedMessage)
                 })
+        }
+    }
+
+    private fun fetchFromLocal(): io.github.howiezuo.unsplash.model.entity.Photo? {
+        realm?.let {
+            return it.where(io.github.howiezuo.unsplash.model.entity.Photo::class.java).equalTo("id", id).findFirst()
+        }
+        return null
+    }
+
+    private fun saveToLocal(photo: Photo) {
+        realm?.let {
+            it.executeTransaction({
+                var p = fetchFromLocal()
+                if (p == null) {
+                    it.createObject(io.github.howiezuo.unsplash.model.entity.Photo::class.java, photo.id)
+                }
+            })
+            it.close()
+        }
     }
 
     fun create() {
+        realm = Realm.getDefaultInstance()
         fetchPhoto()
     }
 
     fun destroy() {
+        realm?.close()
         disposable?.dispose()
     }
 }
